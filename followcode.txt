@@ -1,0 +1,14 @@
+Launch Page
+Sign In, Sign Up (Khong co data, k try catch du lieu)
+Home layout
+Du Lieu
+Card in Home
+Detail Page Card
+Search Page
+Favorite Page
+Search 
+Drawer
+Profile
+Information Detail
+Cart
+History
