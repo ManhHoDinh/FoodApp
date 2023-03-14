@@ -11,9 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  english_words: ^4.0.0
   provider: ^6.0.0
-
+  hive_flutter: ^1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -22,3 +21,18 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/fonts/abel/
+    - assets/fonts/karla/
+  fonts:
+    - family: Abel
+      fonts:
+        - asset: assets/fonts/abel/Abel-Regular.ttf
+          weight: 700
+    - family: Karla
+      fonts:
+        - asset: assets/fonts/karla/Karla-Regular.ttf
+        - asset: assets/fonts/karla/Karla-Bold.ttf
+          weight: 700
+          
