@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:food_app/pages/home.dart';
+import 'package:food_app/pages/main_screen.dart';
 import 'package:food_app/pages/launching.dart';
 import 'package:food_app/pages/sign_in_up.dart';
 
@@ -29,21 +29,23 @@ class _LoadingPageState extends State<LoadingPage> {
   void NextPage() async {
     await Future.delayed(Duration(seconds: 2));
     // ignore: use_build_context_synchronously
-    final ignoreIntro = LocalStorageHelper.getValue(localStorage.ignoreIntro) as bool?;
-    final isLogged = LocalStorageHelper.getValue(localStorage.isLogged) as bool?;
+    final ignoreIntro =
+        LocalStorageHelper.getValue(localStorage.ignoreIntro) as bool?;
+    final isLogged =
+        LocalStorageHelper.getValue(localStorage.isLogged) as bool?;
     // ignore: unnecessary_null_comparison
     if (ignoreIntro != null && ignoreIntro) {
-      if(isLogged != null && isLogged)
-      {
-         Navigator.of(context).pushNamed(HomePage.routeName);
-      }
-      else
-      {
-        Navigator.of(context).pushNamed(SignInOrUpPage.routeName);
+      if (isLogged != null && isLogged) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(MainScreen.routeName, (routes) => false);
+      } else {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            SignInOrUpPage.routeName, (routes) => false);
       }
     } else {
       LocalStorageHelper.setValue(localStorage.ignoreIntro, true);
-      Navigator.of(context).pushNamed(LaunchingPage.routeName);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(LaunchingPage.routeName, (routes) => false);
     }
   }
 

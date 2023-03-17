@@ -6,6 +6,7 @@ class ColorPalette {
   static const Color highlightColor = Color(0xffFA4A0C);
   static const Color blackText = Color(0xFF000000);
   static const Color greyText = Color(0xFF9A9A9D);
+  static const Color searchBoxBackground = Color(0xFFEFEEEE);
 }
 
 class Gradients {

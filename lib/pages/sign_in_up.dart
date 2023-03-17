@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app/pages/home.dart';
+import 'package:food_app/pages/main_screen.dart';
 import 'package:food_app/values/colors.dart';
 import 'package:food_app/values/images_assets.dart';
 import 'package:food_app/values/text_styles.dart';
@@ -128,7 +128,8 @@ class _SignInOrUpPageState extends State<SignInOrUpPage>
                     margin: EdgeInsets.only(top: 70),
                     child: CustomButton(
                         Color: ColorPalette.highlightColor, Text: 'Login', () {
-                      Navigator.of(context).pushNamed(HomePage.routeName);
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          MainScreen.routeName, (routes) => false);
                     }),
                   )
                 ],

@@ -1,7 +1,7 @@
-Launch Page
-Sign In, Sign Up (Khong co data, k try catch du lieu)
-Home layout
-Du Lieu
+Launch Page |
+Sign In, Sign Up (Khong co data, k try catch du lieu) |
+Home layout |
+Du Lieu 
 Card in Home
 Detail Page Card
 Search Page
