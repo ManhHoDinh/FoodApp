@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:food_app/pages/food_detail.dart';
 import 'package:food_app/values/colors.dart';
 import 'package:food_app/values/images_assets.dart';
 import 'package:food_app/values/text_styles.dart';
-import 'package:food_app/widgets/models/foods.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:food_app/models/foods.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,8 +39,8 @@ class _HomeScreenState extends State<HomeScreen>
             'Veggie tomato mix: All our foods are double checked before leaving our stores so by any case you found a broken food please contact our hotline immediately.',
         primaryImage: Image.asset(
           ImageAssests.item1,
-          width: 164,
-          height: 164,
+          width: 183,
+          height: 276,
         ));
     Foods.add(f1);
     foodDetail f2 = foodDetail(
@@ -54,8 +52,8 @@ class _HomeScreenState extends State<HomeScreen>
             'Egg and cucmber: All our foods are double checked before leaving our stores so by any case you found a broken food please contact our hotline immediately.',
         primaryImage: Image.asset(
           ImageAssests.item2,
-          width: 164,
-          height: 164,
+          width: 183,
+          height: 276,
         ));
     Foods.add(f2);
 
@@ -68,8 +66,8 @@ class _HomeScreenState extends State<HomeScreen>
             'Fried chicken m: All our foods are double checked before leaving our stores so by any case you found a broken food please contact our hotline immediately.',
         primaryImage: Image.asset(
           ImageAssests.item3,
-          width: 164,
-          height: 164,
+          width: 183,
+          height: 276,
         ));
     Foods.add(f3);
     foodDetail f4 = foodDetail(
@@ -81,8 +79,8 @@ class _HomeScreenState extends State<HomeScreen>
             'Moi-moi and ekpa: All our foods are double checked before leaving our stores so by any case you found a broken food please contact our hotline immediately.',
         primaryImage: Image.asset(
           ImageAssests.item4,
-          width: 164,
-          height: 164,
+          width: 183,
+          height: 276,
         ));
     Foods.add(f4);
     foodDetail f5 = foodDetail(
@@ -94,8 +92,8 @@ class _HomeScreenState extends State<HomeScreen>
             'Veggie tomato mix: All our foods are double checked before leaving our stores so by any case you found a broken food please contact our hotline immediately.',
         primaryImage: Image.asset(
           ImageAssests.item5,
-          width: 164,
-          height: 164,
+          width: 183,
+          height: 276,
         ));
     Foods.add(f5);
     foodDetail f6 = foodDetail(
@@ -107,15 +105,18 @@ class _HomeScreenState extends State<HomeScreen>
             'Veggie tomato mix: All our foods are double checked before leaving our stores so by any case you found a broken food please contact our hotline immediately.',
         primaryImage: Image.asset(
           ImageAssests.item6,
-          width: 164,
-          height: 164,
+          width: 183,
+          height: 276,
         ));
     Foods.add(f1);
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: Drawer(),
       body: Column(
         children: [
           Container(
@@ -126,6 +127,9 @@ class _HomeScreenState extends State<HomeScreen>
                     child: Container(
                   alignment: Alignment.topLeft,
                   child: InkWell(
+                    onTap: () {
+                      _scaffoldKey.currentState?.openDrawer();
+                    },
                     child: Icon(FontAwesomeIcons.bars),
                   ),
                 )),
@@ -208,61 +212,18 @@ class _HomeScreenState extends State<HomeScreen>
           Expanded(
             child: TabBarView(
               children: [
-                PageView.builder(
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.only(top: 30),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Positioned(
-                            top: 60,
-                            child: Container(
-                              width: 220,
-                              height: 270,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                  color: ColorPalette.secondColor),
-                              child: Center(
-                                child: Column(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 145, left: 45, right: 50),
-                                    child: Text(
-                                      Foods[index]?.Title ?? '',
-                                      style: TextStyles.h4.copyWith(),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 15, bottom: 39),
-                                    child: Text(
-                                      'N' +
-                                          (Foods[index]?.Price ?? 0).toString(),
-                                      style: TextStyles.h5.copyWith(
-                                          color: ColorPalette.highlightColor),
-                                    ),
-                                  )
-                                ]),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                              child: Container(
-                                  alignment: Alignment.topCenter,
-                                  child: Foods[index]?.PrimaryImage ??
-                                      Container()))
-                        ],
-                      ),
-                    );
-                  },
-                  itemCount: Foods.length,
+                FoodsWidget(
+                  Foods: Foods,
                 ),
-                Text('Person'),
-                Text('Person'),
-                Text('Person')
+                FoodsWidget(
+                  Foods: Foods,
+                ),
+                FoodsWidget(
+                  Foods: Foods,
+                ),
+                FoodsWidget(
+                  Foods: Foods,
+                ),
               ],
               controller: _tabController,
             ),
@@ -270,5 +231,85 @@ class _HomeScreenState extends State<HomeScreen>
         ],
       ),
     );
+  }
+  // ignore: non_constant_identifier_names
+}
+
+class FoodsWidget extends StatefulWidget {
+  FoodsWidget({super.key, required this.Foods});
+  List<foodDetail> Foods = [];
+
+  @override
+  State<FoodsWidget> createState() => _FoodsWidgetState();
+}
+
+class _FoodsWidgetState extends State<FoodsWidget> {
+  late PageController _pageController;
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(viewportFraction: 0.6);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PageView.builder(
+      controller: _pageController,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {
+            print(widget.Foods[index].Title);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        FoodDetailScreen(food: widget.Foods[index])));
+          },
+          child: Stack(
+            alignment: AlignmentDirectional.topStart,
+            children: [
+              Positioned(
+                top: 85,
+                child: Container(
+                  height: 270,
+                  width: 220,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      color: ColorPalette.secondColor),
+                  child: Center(
+                    child: Column(children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 145, left: 45, right: 50),
+                        child: Text(
+                          widget.Foods[index]?.Title ?? '',
+                          style: TextStyles.h4.copyWith(),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15, bottom: 39),
+                        child: Text(
+                          'N' + (widget.Foods[index]?.Price ?? 0).toString(),
+                          style: TextStyles.h5
+                              .copyWith(color: ColorPalette.highlightColor),
+                        ),
+                      )
+                    ]),
+                  ),
+                ),
+              ),
+              Positioned(
+                  child: Container(
+                      width: 220,
+                      alignment: Alignment.topCenter,
+                      child: widget.Foods[index]?.PrimaryImage ?? Container()))
+            ],
+          ),
+        );
+      },
+      itemCount: widget.Foods.length,
+    );
+    ;
   }
 }
