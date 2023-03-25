@@ -32,58 +32,68 @@ class _MainScreenState extends State<MainScreen> {
           )
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          selectedItemColor: ColorPalette.highlightColor,
-          unselectedItemColor: Colors.black,
-          items: [
-            BottomNavigationBarItem(
-              activeIcon: Icon(
-                Icons.home,
-                size: bottomIconSize + 6,
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          // sets the background color of the `BottomNavigationBar`
+          canvasColor: ColorPalette.primaryColor,
+          // sets the active color of the `BottomNavigationBar` if `Brightness` is light
+          primaryColor: Colors.red,
+        ),
+        child: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            type: BottomNavigationBarType.shifting,
+            backgroundColor: ColorPalette.primaryColor,
+            selectedItemColor: ColorPalette.highlightColor,
+            unselectedItemColor: Colors.black,
+            items: [
+              BottomNavigationBarItem(
+                activeIcon: Icon(
+                  Icons.home,
+                  size: bottomIconSize + 6,
+                ),
+                icon: Icon(
+                  Icons.home_outlined,
+                  size: bottomIconSize + 6,
+                ),
+                label: '',
               ),
-              icon: Icon(
-                Icons.home_outlined,
-                size: bottomIconSize + 6,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  FontAwesomeIcons.heart,
-                  size: bottomIconSize,
-                ),
-                activeIcon: Icon(
-                  FontAwesomeIcons.solidHeart,
-                  size: bottomIconSize,
-                ),
-                label: ''),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  FontAwesomeIcons.user,
-                  size: bottomIconSize,
-                ),
-                activeIcon: Icon(
-                  FontAwesomeIcons.solidUser,
-                  size: bottomIconSize,
-                ),
-                label: ''),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  FontAwesomeIcons.clockRotateLeft,
-                  size: bottomIconSize,
-                ),
-                activeIcon: Icon(
-                  FontAwesomeIcons.clockRotateLeft,
-                  size: bottomIconSize,
-                ),
-                label: '')
-          ]),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    FontAwesomeIcons.heart,
+                    size: bottomIconSize,
+                  ),
+                  activeIcon: Icon(
+                    FontAwesomeIcons.solidHeart,
+                    size: bottomIconSize,
+                  ),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    FontAwesomeIcons.user,
+                    size: bottomIconSize,
+                  ),
+                  activeIcon: Icon(
+                    FontAwesomeIcons.solidUser,
+                    size: bottomIconSize,
+                  ),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    FontAwesomeIcons.clockRotateLeft,
+                    size: bottomIconSize,
+                  ),
+                  activeIcon: Icon(
+                    FontAwesomeIcons.clockRotateLeft,
+                    size: bottomIconSize,
+                  ),
+                  label: '')
+            ]),
+      ),
     );
   }
 }

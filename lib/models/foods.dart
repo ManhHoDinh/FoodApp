@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class foodDetail {
   String? Title = '';
-  Image? PrimaryImage;
-  List<Image>? SubImage = List.empty();
+  String? PrimaryImage;
+  List<String>? SubImage = List.empty();
   int? Price = 0;
   String? DeliveryInfo = '';
   String? ReturnPolicy = '';
@@ -13,6 +13,7 @@ class foodDetail {
     PrimaryImage = primaryImage;
     Price = price;
     ReturnPolicy = returnPolicy;
+    DeliveryInfo = deliveryInfo;
     SubImage = subImage;
   }
 }
